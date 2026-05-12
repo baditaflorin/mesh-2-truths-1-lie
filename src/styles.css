@@ -1,14 +1,9 @@
-/* App-local styles. Mesh chrome (settings drawer, self-ref bar) is provided by
- * @baditaflorin/mesh-common/styles.css imported in main.tsx. */
-
 :root {
   color-scheme: dark;
 }
-
 * {
   box-sizing: border-box;
 }
-
 html,
 body,
 #root {
@@ -22,30 +17,172 @@ body,
   -webkit-tap-highlight-color: transparent;
 }
 
-.feature-placeholder {
-  padding: 6rem 1.5rem 2rem;
+.ttl-screen {
+  padding: 4rem 1rem 5rem;
+  max-width: 36rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+.ttl-header {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
+}
+.ttl-header h1 {
+  margin: 0;
+  color: var(--mesh-accent);
+  font-size: 1.4rem;
+}
+.ttl-name {
+  width: min(260px, 90%);
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--mesh-fg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  text-align: center;
+}
+.ttl-status {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--mesh-muted);
 }
 
-.feature-placeholder h1 {
-  font-size: 1.6rem;
+.ttl-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  width: 100%;
+  max-width: 32rem;
+}
+.ttl-form label {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.6rem;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.5rem 0.8rem;
+}
+.ttl-form label input[type="text"],
+.ttl-form label input[type=""],
+.ttl-form label input:not([type="radio"]) {
+  background: transparent;
+  color: var(--mesh-fg);
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+}
+.ttl-form label > span {
+  font-size: 0.7rem;
+  color: var(--mesh-muted);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+.ttl-form .ttl-lie-tag {
+  background: rgba(255, 107, 107, 0.2);
+  color: #ff6b6b;
+}
+
+.ttl-form button[type="submit"] {
+  background: var(--mesh-accent);
+  color: #0b0a06;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ttl-form button[type="submit"]:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ttl-help {
   margin: 0;
+  color: var(--mesh-muted);
+  font-size: 0.78rem;
+  line-height: 1.4;
+  text-align: center;
+}
+.ttl-info {
+  font-size: 0.95rem;
   color: var(--mesh-accent);
 }
 
-.feature-placeholder p {
-  max-width: 32rem;
-  margin: 0;
-  opacity: 0.85;
-  line-height: 1.5;
+.ttl-deal {
+  background: var(--mesh-accent);
+  color: #0b0a06;
+  border: none;
+  border-radius: 10px;
+  padding: 0.7rem 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
 }
 
-.feature-status {
-  font-size: 0.85rem;
-  opacity: 0.6;
+.ttl-cards {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.ttl-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.ttl-card h3 {
+  margin: 0;
+  color: var(--mesh-accent);
+  font-size: 1.05rem;
+}
+.ttl-card button {
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--mesh-fg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 0.6rem 0.9rem;
+  cursor: pointer;
+  text-align: left;
+}
+.ttl-card button.is-mine {
+  background: var(--mesh-accent);
+  color: #0b0a06;
+  border-color: var(--mesh-accent);
+  font-weight: 600;
+}
+
+.ttl-result .ttl-stmt {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0.7rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 6px;
+}
+.ttl-result .ttl-stmt.is-lie {
+  background: rgba(255, 107, 107, 0.15);
+  border: 1px solid rgba(255, 107, 107, 0.4);
+}
+.ttl-result .ttl-stmt.is-truth {
+  color: rgba(255, 255, 255, 0.85);
+}
+.ttl-tally {
+  color: var(--mesh-muted);
   font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+  white-space: nowrap;
 }
