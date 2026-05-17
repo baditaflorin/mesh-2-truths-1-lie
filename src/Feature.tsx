@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import {
   commit,
+  MeshNameInput,
   randomSalt,
   verifyReveal,
   type MeshConfig,
@@ -145,11 +146,11 @@ export function Feature({ room, config }: Props) {
     <div className="ttl-screen">
       <header className="ttl-header">
         <h1>two truths &amp; a lie</h1>
-        <input
+        <MeshNameInput
           className="ttl-name"
           placeholder="your name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={setName}
           maxLength={24}
         />
         <p className="ttl-status">
