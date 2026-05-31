@@ -95,13 +95,22 @@ export function Feature({ room, config }: Props) {
     myEntryRef.current = { submission, salt };
   };
 
-  const reveal = () => {
-    if (!myEntryRef.current) return;
-    if (yReveals.has(room.peerId)) return;
+  // Open this peer's own commitment by publishing its salt+payload. Idempotent.
+  // Returns false if there is nothing to reveal (e.g. this peer never committed).
+  const revealMine = (): boolean => {
+    if (!myEntryRef.current) return false;
+    if (yReveals.has(room.peerId)) return true;
     yReveals.set(room.peerId, {
       salt: myEntryRef.current.salt,
       payload: JSON.stringify(myEntryRef.current.submission),
     });
+    return true;
+  };
+
+  // Submit-phase "everyone committed → reveal" button: open my own entry AND
+  // advance the room into the vote phase for everyone.
+  const startVoting = () => {
+    revealMine();
     yPhase.set("current", { phase: "vote" });
   };
 
@@ -205,7 +214,7 @@ export function Feature({ room, config }: Props) {
             </p>
           )}
           {allCommitted && (
-            <button type="button" className="ttl-deal" onClick={reveal}>
+            <button type="button" className="ttl-deal" onClick={startVoting}>
               everyone committed → reveal &amp; start voting
             </button>
           )}
@@ -218,6 +227,15 @@ export function Feature({ room, config }: Props) {
             <p className="ttl-info">
               waiting on reveals: {yReveals.size}/{players.length}
             </p>
+          )}
+          {/* A peer who entered the vote phase without yet opening its own
+              commitment (e.g. another player clicked "start voting" first)
+              must still be able to reveal — otherwise the room deadlocks at
+              `allRevealed === false` and nobody can reach results. */}
+          {!yReveals.has(room.peerId) && myEntryRef.current && (
+            <button type="button" className="ttl-deal" onClick={revealMine}>
+              reveal my statements
+            </button>
           )}
           <ul className="ttl-cards">
             {players.map((p) => {
