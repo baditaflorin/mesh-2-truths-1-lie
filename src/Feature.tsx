@@ -177,6 +177,10 @@ export function Feature({ room, config }: Props) {
                 void submit();
               }}
             >
+              <p className="ttl-help">
+                Write three statements about yourself — two true, one made up. Tap the radio next to
+                your fib to mark it the lie, then commit.
+              </p>
               {([0, 1, 2] as const).map((i) => (
                 <label key={i}>
                   <input
@@ -184,6 +188,7 @@ export function Feature({ room, config }: Props) {
                     name="lie"
                     checked={draftLie === i}
                     onChange={() => setDraftLie(i)}
+                    aria-label={`mark statement ${i + 1} as the lie`}
                   />
                   <input
                     value={draft[i]}

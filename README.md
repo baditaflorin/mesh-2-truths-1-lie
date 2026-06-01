@@ -16,6 +16,10 @@ Tip the dev: **https://www.paypal.com/paypalme/florinbadita**
 
 ## What it is
 
+Everyone writes two true statements and one lie. Each entry is sealed behind a SHA-256 **commitment** so nobody — not even a host — can peek before the deadline. Once all players have committed, the room reveals, everyone votes on which statement is the fib, and the results unmask each lie with the vote tally.
+
+**Try it in 30 seconds:** open the live link in two browser tabs (they're two peers in the same room). Commit a set of statements in each tab, hit "everyone committed → reveal", vote across tabs, then "show results".
+
 Peer-to-peer browser app, no backend of its own beyond the self-hosted WebRTC stack listed below. Built on `@baditaflorin/mesh-common`, hosted on GitHub Pages from `docs/`.
 
 ## Quickstart (local)
