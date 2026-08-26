@@ -1,0 +1,19 @@
+# The fleet validates the native GitHub events it protects.
+when:
+  - event: [push, pull_request]
+
+steps:
+  verify:
+    image: node:22-bookworm
+    commands:
+      - git clone --depth 1 https://github.com/baditaflorin/mesh-common.git ../mesh-common
+      - npm ci --prefix ../mesh-common
+      - npm ci
+      - npx playwright install --with-deps chromium
+      - npm run fmt:check
+      - npm run typecheck
+      - npm run build
+      - npm run smoke
+      - CI=true npm run test
+      - MESH_RUN_LEAK_TEST=1 MESH_LEAK_DURATION_MS=5000 MESH_LEAK_NOISE_OPS=20 CI=true npm run test:leak
+      - npm run --if-present audit:security
